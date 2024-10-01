@@ -16,7 +16,7 @@ const App = () => {
                 <button>Reniciar</button>
             </C.Info>
             <C.GridArea>
-
+                ...
             </C.GridArea>
         </C.Container>
     );
