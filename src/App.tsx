@@ -5,6 +5,7 @@ import { Button } from './components/Button';
 import { InfoItem } from './components/infoItem';
 import RestartIcon from './svgs/restart.svg';
 import { GridItemType } from './types/GridItemType';
+import { items } from './data/items';
 
 const App = () => {
 
@@ -20,6 +21,25 @@ const App = () => {
     }, []);
 
     const resetAndCreateGrid = () => {
+        // Passo 1 - resetar o jogo
+        setTimeElapsed(0);
+        setMoveCount(0);
+        setShownCount(0);
+
+        // Passo 2 - criar o grid
+        let tmpGrid: GridItemType[] = [];
+        for (let i = 0; i < (items.length * 2); i++) {
+            tmpGrid.push({
+                item: null,
+                shown: false,
+                permanentShown: false
+            });
+        }
+
+        setGridItems(tmpGrid);
+
+        // Passo 3 - começar o jogo
+        setPlaying(true);
 
     }
 
