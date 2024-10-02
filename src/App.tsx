@@ -7,6 +7,7 @@ import RestartIcon from './svgs/restart.svg';
 import { GridItemType } from './types/GridItemType';
 import { items } from './data/items';
 import { GridItem } from './components/GridItem';
+import { formateTimeElapsed } from './helpers/formatTimeElapsed';
 
 const App = () => {
 
@@ -20,6 +21,16 @@ const App = () => {
     useEffect(() => {
         resetAndCreateGrid();
     }, []);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (playing) {
+                setTimeElapsed(timeElapsed + 1);
+            }
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [playing, timeElapsed]);
 
     const resetAndCreateGrid = () => {
         // Passo 1 - resetar o jogo
@@ -66,7 +77,7 @@ const App = () => {
                 </C.LogoLink>
 
                 <C.InfoArea>
-                    <InfoItem label="Tempo" value="00:00" />
+                    <InfoItem label="Tempo" value={formateTimeElapsed(timeElapsed)} />
                     <InfoItem label="Movimentos" value="00" />
                 </C.InfoArea>
 
